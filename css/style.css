@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+#app {
+  margin: 3vh auto;
+  max-width: 700px;
+  padding: 2rem;
+  /* border: 1px solid red; */
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem;
+}
+
+header .search input {
+  padding: .5rem;
+}
+
+header .search button {
+  padding: .5rem;
+  width: 3rem;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.295);
+  border-radius: 10px
+}
+
+table th {
+  padding: 1.5rem;
+
+  background-color: #415a77;
+  color: white;
+}
+
+table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* table tbody td {
+  border: 1px solid red;
+} */
+
+table tr:nth-child(odd) {
+  background-color: rgb(241, 240, 240);
+}
+
+table tr:nth-child(even) {
+  background-color: rgb(223, 223, 223);
+}
+
+
+td.user {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 1rem;
+
+  padding: 1rem;
+}
+
+td.user img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+
+td.repositories,
+td.followers {
+  padding: 1rem;
+  text-align: left;
+}
+
+td.remove {
+  padding: 1rem;
+  text-align: center;
+}
+
+td.remove button {  
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+
+  padding: 0.5rem;
+  cursor: pointer;
+  color: red;
+}
