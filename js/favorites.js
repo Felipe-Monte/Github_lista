@@ -49,7 +49,6 @@ export class FavoritesViewer extends Favorites {
 
       row.querySelector('.remove').onclick = () => {
         const isOk = confirm("Tem certeza que deseja apagar ?")
-
       }
 
       this.tbody.append(row)
