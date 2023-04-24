@@ -1,33 +1,60 @@
 
+export class GithubUsers {
+  static search(username) {
+    const endpoint = `https://api.github.com/users/${username}`
+
+    return fetch(endpoint)
+      .then(data => data.json())
+      .then(data => ({
+        login: data.login,
+        name: data.name,
+        public_repos: data.public_repos,
+        followers: data.followers
+      }))
+  }
+}
+
+// como os dados serão estruturados
 export class Favorites {
   constructor(root) {
     this.root = document.querySelector("#app")
     this.load()
+
+    GithubUsers.search("Felipe-Monte").then(user => console.log(user))
   }
 
+  // salvando no localStorage
   load() {
-    this.entries = [
-      {
-        login: "Felipe-Monte",
-        name: "Felipe-Monte-span",
-        public_repos: "99",
-        followers: "5000"
-      },
-      {
-        login: "Jonas",
-        name: "Jonas-span",
-        public_repos: "40",
-        followers: "2500"
-      }
-    ]
+    this.entries = JSON.parse(localStorage.getItem('@github-favorites:')) || []
+  }
+
+  // função para deletar usuario clicado
+  delete(user) {
+    // filtrando e atribuindo a entries
+    const filteredEntries = this.entries.filter(entry =>
+      entry.login !== user.login)
+
+    this.entries = filteredEntries
+    this.update()
   }
 }
 
+// clase que vai criar a vizualização de eventos do HTML
 export class FavoritesViewer extends Favorites {
   constructor(root) {
     super(root)
     this.tbody = this.root.querySelector('table tbody')
     this.update()
+    this.onadd()
+  }
+
+  onadd() {
+    const addButton = this.root.querySelector('.search button')
+    addButton.onclick = () => {
+      const input = this.root.querySelector('#input-search')
+      const inputValue = input.value
+      console.log(inputValue)
+    }
   }
 
   update() {
@@ -49,6 +76,10 @@ export class FavoritesViewer extends Favorites {
 
       row.querySelector('.remove').onclick = () => {
         const isOk = confirm("Tem certeza que deseja apagar ?")
+
+        if (isOk) {
+          this.delete(user)
+        }
       }
 
       this.tbody.append(row)
